@@ -3,77 +3,47 @@
 #include <algorithm>
 #include <climits>
 
-
-int maxCrossSum(std::vector<int>& arr, int low, int mid, int high,int constraint) {
-
-    int sum = 0;
-    int leftSum = sum;
+int maxCrossSum(std::vector<int>& arr, int low, int mid, int high) {
+    int sum = 0, leftSum = INT_MIN;
     for (int i = mid; i >= low; i--) {
-        sum += arr[i]; // first calculate
-		if (sum <= constraint) {
-			leftSum = std::max(leftSum, sum);
-		}
+        sum += arr[i];
+        leftSum = std::max(leftSum, sum);
+        //if (sum <= constraint)
     }
 
     sum = 0;
-    int rightSum = sum;
-
+    int rightSum = INT_MIN;
     for (int i = mid + 1; i <= high; i++) {
         sum += arr[i];
-        if (sum <= constraint) {
-            rightSum = std::max(rightSum, sum);
-        }
-        
+        rightSum = std::max(rightSum, sum);
+        //if (sum <= constraint)
     }
-	int max = std::max(leftSum, rightSum);
 
-    return max;
+   /* if (leftSum == INT_MIN) leftSum = 0;
+    if (rightSum == INT_MIN) rightSum = 0;
+
+    int crossSum = leftSum + rightSum;
+    return (crossSum <= constraint) ? crossSum : std::max(leftSum, rightSum);*/
+	return leftSum + rightSum;
 }
 
-
-int maxSubArray(std::vector<int>& arr, int low, int high,int constraint) {
-
+int maxSubArray(std::vector<int>& arr, int low, int high) {
     if (low == high) return arr[low];
-    int mid;
-    mid = (low + high) / 2;
 
-    int left = maxSubArray(arr, low, mid, constraint);
-    int right = maxSubArray(arr, mid + 1, high, constraint);
-    int cross = maxCrossSum(arr, low, mid, high, constraint);
+    int mid = low + (high - low) / 2;
 
-    for (int i = low; i <= high; i++) {
-        std::cout << arr[i] << " ";
-    }
-    std::cout << std::endl;
-    std::cout << "Low:" << low << " High:" << high <<std::endl;
-    std::cout << std::endl;
-   
+    int left = maxSubArray(arr, low, mid);
+    int right = maxSubArray(arr, mid + 1, high);
+    int cross = maxCrossSum(arr, low, mid, high);
 
-    int maximum = std::max({ left,right,cross });
-
-    return maximum;
+    return std::max({ left, right, cross });
 }
 
 int main() {
-    std::vector<int> arr = { 2, 1, 3, 4 };
-    int size = arr.size(); 
-    int constraint = 5;
+    std::vector<int> arr = { 3,4,5,6,-4,2,-6,-7};
 
-    int high = size - 1;
-    int low = 0;
-
-    int MAAAA = maxSubArray(arr, low, high, constraint);
-
-    std::cout << "Maximum Value " << MAAAA << std::endl;
+    int result = maxSubArray(arr, 0, arr.size() - 1);
+    std::cout << "Maximum Value: " << result << std::endl;
 
     return 0;
-
 }
-
-
-
-
-
-
-
-
