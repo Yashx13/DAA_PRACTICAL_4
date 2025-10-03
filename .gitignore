@@ -1,49 +1,34 @@
-# Visual Studio cache and temp files
+# Visual Studio
 .vs/
-*.vcxproj.user
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
 *.VC.db
 *.VC.opendb
-*.vscode/
 
-# Visual Studio build outputs
-x64/
-Debug/
-Release/
-build/
-*.obj
-*.o
+# Build results
+bin/
+obj/
+[Bb]uild/
+[Bb]uilds/
+
+# Visual Studio Code
+.vscode/
+
+# NuGet
+*.nupkg
+packages/
+*.snupkg
+
+# Others
+TestResults/
+*.cache
+*.pdb
 *.exe
 *.dll
-*.pdb
-*.ilk
-*.idb
-*.ipdb
 *.log
-*.tlog/
-
-# Visual Studio generated files
-*.sdf
-*.cachefile
-*.dbmdl
-*.opensdf
-*.vsix
-*.vsp
-*.vsmdi
-*.psess
-*.vspx
-*.ncb
-*.sbr
-*.tlh
-*.tli
-*.bak
-*.orig
-
-# Other
-*.app
-*.iobj
-*.ipdb
-.vsFileContentIndex/
+*.zip
+*.tar.gz
+*.7z
+*.db
